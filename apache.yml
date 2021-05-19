@@ -26,3 +26,7 @@
          permanent: true 
          state: enabled 
          immediate: yes
+     - name: create a simple webpage
+       copy:
+         content: "welcome to ansible rock"
+         dest: /var/www/html/index.html
