@@ -1,6 +1,6 @@
 ---
   - 
-   host: client
+   hosts: client
    tasks:
      - name: Install latest package of apache. 
        yum:
