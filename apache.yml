@@ -6,20 +6,20 @@
        yum:
          name: httpd
          state: latest
-    - name: start and enable http 
-      service:
-        name: httpd
-        enabled: true
-        state: started
-    - name: install latest package of firewalld
-      yum:
+     - name: start and enable http 
+       service:
+         name: httpd
+         enabled: true
+         state: started
+     - name: install latest package of firewalld
+       yum:
+          name: firewalld
+          state: latest
+     - name: start the firewalld 
+       service:
          name: firewalld
-         state: latest
-    - name: start the firewalld 
-      service:
-        name: firewalld
-        enabled: true
-        state: started
+         enabled: true
+         state: started
     - name: open http port 
       firewalld:
         service: http 
