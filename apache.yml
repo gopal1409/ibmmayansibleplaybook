@@ -20,9 +20,9 @@
          name: firewalld
          enabled: true
          state: started
-    - name: open http port 
-      firewalld:
-        service: http 
-        permanent: true 
-        state: enabled 
-        immediate: yes
+     - name: open http port 
+       firewalld:
+         service: http 
+         permanent: true 
+         state: enabled 
+         immediate: yes
