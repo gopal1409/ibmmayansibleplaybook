@@ -14,3 +14,26 @@
      - name: current kernal version
        shell: uname -r
        register: curr_ker
+     - name: initiate patching 
+       yum:
+         name: kernel
+         state: latest
+       register: yum_update
+     - debug: msg="kernal has been update"
+       when: yum_update.rc == 0
+     - name: check if reboot is required or not. 
+       shell: kernel_new=$(rpm -qa --last kernel | head -1| awk '{print $1}' sed 's/kernel-//g'); kernel_now=$(uname -r); if [[ $kernel_new != $kernel_now ]] ; then echo "reboot is required"; else echo "reboot is not required"; fi
+       ignore_erros: true
+       register: reboot_check
+     - debug: msg="{{ reboot_check }}"
+     - name: reboot the system after patching
+       shell: "shutdown -r now"
+       async: 1
+       poll: 0
+     - name: wait for the system to comeup
+       pause:
+         minutes: 1
+     - name: New Kernal version
+       shell: uname -r
+       register: new_ker 
+     - debug: msg= "New kernal version is {{ new_ker }} old kernal version was {{ curr_ker.stdout }}"
