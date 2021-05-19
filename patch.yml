@@ -20,7 +20,7 @@
          state: latest
        register: yum_update
      - debug: msg="kernal has been update"
-       when: yum_update.rc == 0
+         when: yum_update.rc == 0
      - name: check if reboot is required or not. 
        shell: kernel_new=$(rpm -qa --last kernel | head -1| awk '{print $1}'| sed 's/kernel-//g'); kernel_now=$(uname -r); if [[ $kernel_new != $kernel_now ]] ; then echo "reboot is required"; else echo "reboot is not required"; fi
        ignore_erros: true
