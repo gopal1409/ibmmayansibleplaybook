@@ -7,3 +7,7 @@
        ignore_errors: true
        register: appr_proc_check
      - debug: msg='{{ appr_proc_check }}'
+     - name: descision point the patch should be applied or not 
+       fail:
+         msg="{{ inventory_hostname }} have running application, please stop first then pathcing"
+       when: appr_proc_check.stdout == "process_running"
