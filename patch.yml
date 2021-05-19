@@ -11,3 +11,6 @@
        fail:
          msg="{{ inventory_hostname }} have running application, please stop first then pathcing"
        when: appr_proc_check.stdout == "process_running"
+     - name: current kernal version
+       shell: uname -r
+       register: curr_ker
